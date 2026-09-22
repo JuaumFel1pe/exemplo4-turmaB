@@ -12,7 +12,6 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,7 +56,7 @@ public class DepartamentoController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void apagar(@PathVariable Long id){
-        if(repository.existsById(id)){
+        if(!repository.existsById(id)){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         repository.deleteById(id);
